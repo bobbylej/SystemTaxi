@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="HomepageModule">
+  <head>
+    <title>SystemTaxi Logowanie</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/angular-toastr.css">
+    <link rel="stylesheet" href="/styles/bootstrap.3.1.1.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <!--STYLES END-->
+
+    <!--Added this so the client has access to the csrf tag and it's grabbed first service side on every page -->
+    <script type="text/javascript">
+    window.SAILS_LOCALS = { _csrf: "<%= _csrf %>" };
+    </script>
+
+  </head>
+
+  <body ng-cloak>
+
+    <div class="container-fluid" ng-controller="HomepageController">
+      <%- include login %>
+
+    </div>
+
+    <div id="content">
+      <div ng-view></div>
+    </div>
+
+    <div class=" col-md-8 col-md-offset-2">
+      <div class="jumbotron">
+        <a href="/signup_employee" class="btn btn-lg btn-success">Sign up now!</a>
+      </div>
+    </div>
+
+
+
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/dependencies/jquery-2.1.4.min.js"></script>
+    <script src="/js/dependencies/angular.js"></script>
+    <script src="/js/dependencies/angular-route.js"></script>
+    <script src="/js/dependencies/angular-toastr.js"></script>
+    <script src="/js/dependencies/compareTo.module.js"></script>
+    <script src="/js/public/signup_employee/SignupEmployeeModule.js"></script>
+    <script src="/js/public/signup/SignupModule.js"></script>
+    <script src="/js/private/dashboard/DashboardModule.js"></script>
+    <script src="/js/public/homepage/HomepageModule.js"></script>
+    <script src="/js/genetic.js"></script>
+    <script src="/js/private/dashboard/CoursesController.js"></script>
+    <script src="/js/private/dashboard/DashboardController.js"></script>
+    <script src="/js/public/homepage/HomepageController.js"></script>
+    <script src="/js/public/signup/SignupController.js"></script>
+    <script src="/js/public/signup_employee/SignupEmployeeController.js"></script>
+    <script src="/js/test.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>
