@@ -5,11 +5,12 @@ DashboardModule.controller( 'CoursesController', ['$scope', '$http', 'toastr', f
     $scope.courses=CoursesService.getCourses();
   }
   init();
+  /*
   // or to retrieve a specific employee by name
   $scope.find=function(){
     $scope.courses=CoursesService.getCourses();
   }
-
+  */
   //$scope.courses = window.SAILS_LOCALS.apps;
   //console.log( apps );
   //console.log( window.SAILS_LOCALS.apps );
@@ -17,6 +18,7 @@ DashboardModule.controller( 'CoursesController', ['$scope', '$http', 'toastr', f
   /*
   $http.get( '/courses' ).success( function(data) {
     $scope.courses = data;
+    console.log( data );
   } );
   */
   /*
@@ -34,12 +36,3 @@ DashboardModule.controller( 'CoursesController', ['$scope', '$http', 'toastr', f
   getCourses();
   */
 } ] );
-
-DashboardModule.service( 'CoursesService', function( $resource ) {
-    this.getCourses = function() {
-      return $resource( '/courses', {} )
-          .query({}).$promise.then( function( response ) {
-              return response;
-          } );
-    };
-} );
