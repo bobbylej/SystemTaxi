@@ -1,7 +1,13 @@
 
-<div class="jumbotron text-center" ng-controller="DashboardModule.CoursesController">
+<div class="jumbotron text-center" ng-controller="CoursesController">
 
        <h1>Kursy</h1>
 
-       <p>{{ courses }}</p>
+       <table>
+         <tr ng-repeat="course in courses">
+          <td>{{ course.klient }}</td>
+          <td>{{ course.taksowkarz }}</td>
+          <td>{{ course.adres_dostarczenia }}</td>
+         </tr>
+       </table>
    </div>

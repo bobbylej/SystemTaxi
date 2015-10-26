@@ -1,10 +1,10 @@
-DashboardModule.controller( 'CoursesController', ['$scope', '$http', 'toastr', function( $scope, $http, CoursesService ) {
-
-  console.log( 'Kursy Factory', CoursesService );
+DashboardModule.controller( 'CoursesController', ['$scope', '$http', '$filter', 'toastr', function( $scope, $http, $filter, CoursesService ) {
+  /*
   function init(){
     $scope.courses=CoursesService.getCourses();
   }
   init();
+  */
   /*
   // or to retrieve a specific employee by name
   $scope.find=function(){
@@ -21,6 +21,26 @@ DashboardModule.controller( 'CoursesController', ['$scope', '$http', 'toastr', f
     console.log( data );
   } );
   */
+  var allCourses = [];
+
+  $http.get("/courses")
+  .success( function( response ) {
+    allCourses = response;
+    console.log( 'AllIn', allCourses );
+    $scope.courses = getCourses( 1 );
+    //$scope.courses = response;
+  });
+
+  function getCourses( taxiId ) {
+    var courses = $filter('filter')( allCourses, function ( course ) {
+      return course.taksowkarz === taxiId;
+    } );
+    console.log( 'Filtered', courses );
+    return courses;
+  }
+
+
+
   /*
   function getCourses() {
     $http.jsonp(

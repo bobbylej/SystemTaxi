@@ -22,7 +22,7 @@ DashboardModule.config(function($routeProvider, $locationProvider) {
 
 DashboardModule.service( 'CoursesService', function( $resource ) {
     this.getCourses = function() {
-      return $resource( '/courses', {} )
+      return $resource( 'http://localhost:1337/courses', {} )
           .query({}).$promise.then( function( response ) {
               return response;
           } );
