@@ -29,6 +29,12 @@ module.exports = {
       required: true
     },
 
+    osob: {
+      type: 'integer',
+      required: true,
+      size: 3
+    },
+
     czas_zamowienia: {
       type: 'datetime',
       required: true

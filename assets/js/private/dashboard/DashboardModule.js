@@ -13,6 +13,11 @@ DashboardModule.config(function($routeProvider, $locationProvider) {
   .when('/courses', {
       templateUrl : '/templates/courses.html',
       controller  : 'CoursesController'
+  })
+
+  .when('/clients', {
+      templateUrl : '/templates/clients.html',
+      controller  : 'ClientsController'
   });
 
   // use the HTML5 History API
@@ -20,17 +25,6 @@ DashboardModule.config(function($routeProvider, $locationProvider) {
 });
 
 
-DashboardModule.service( 'CoursesService', function( $resource ) {
-    this.getCourses = function() {
-      return $resource( 'http://localhost:1337/courses', {} )
-          .query({}).$promise.then( function( response ) {
-              return response;
-          } );
-    };
-} );
-
-
-// create the controller and inject Angular's $scope
 DashboardModule.controller('mainController', function($scope) {
     // create a message to display in our view
     $scope.message = 'Everyone come and see how good I look!\n';

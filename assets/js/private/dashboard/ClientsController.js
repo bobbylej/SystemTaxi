@@ -1,27 +1,31 @@
-DashboardModule.controller( 'CoursesController', ['$scope', '$http', '$filter', 'toastr', function( $scope, $http, $filter ) {
+DashboardModule.controller( 'ClientsController', ['$scope', '$http', '$filter', 'toastr', function( $scope, $http, $filter ) {
 
   var allCourses = [];
 
   $( '.sidebar .menu a' ).removeClass( 'active' );
-  $( '.sidebar .menu .courses-link' ).addClass( 'active' );
+  $( '.sidebar .menu .clients-link' ).addClass( 'active' );
 
   $scope.currentPage = 1;
+  $scope.course = {};
+  $scope.course.klient = -1;
   //fillPagination( $scope.currentPage );
-  filterCourses( [] );
 
   $scope.filter = function( course ) {
     console.log( course );
-    var filters = [];
-    for( var key in course ) {
-      if( course[ key ] ) {
-        filters.push( {
-          key: key,
-          value: course[ key ]
-        } );
+    if( course.klient && course.klient != '' ) {
+      var filters = [];
+      for( var key in course ) {
+        if( course[ key ] ) {
+          filters.push( {
+            key: key,
+            value: course[ key ]
+          } );
+        }
       }
+      filterCourses( filters );
     }
-    filterCourses( filters );
   }
+  $scope.filter( $scope.course );
 
   $scope.changePage = function( page, course ) {
     console.log( page, course );

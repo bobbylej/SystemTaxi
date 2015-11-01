@@ -1,0 +1,12 @@
+.content-courses .preview-course {
+  display: none;
+}
+
+th input.form-control {
+  font-size: 12px;
+  padding: 6px;
+}
+
+th input.form-control[type='number'] {
+  min-width: 50px;
+}

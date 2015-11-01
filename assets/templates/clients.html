@@ -1,7 +1,10 @@
 <div class="content content-courses">
-<div class="jumbotron text-center" ng-controller="CoursesController">
+<div class="jumbotron text-center" ng-controller="ClientsController">
 
-   <h1>Kursy</h1>
+   <h1>Klient</h1>
+     <div class="form-group">
+       <input type="text" class="form-control" name="courseKlient" ng-model="course.klient" ng-change="filter( course )" placeholder="Klient">
+     </div>
    <div class="table-filter">
      <form class="form-inline">
      </form>
@@ -10,6 +13,7 @@
        <table class="table table-bordered table-striped table-hover">
          <thead>
            <tr>
+             <th></th>
              <th>
                <div class="form-group">
                  <input type="number" class="form-control" name="courseId" ng-model="course.id" ng-change="filter( course )" placeholder="Id">
@@ -18,11 +22,6 @@
              <th>
                <div class="form-group">
                  <input type="text" class="form-control" name="courseStatus" ng-model="course.status_kursu" ng-change="filter( course )" placeholder="Status kursu">
-               </div>
-             </th>
-             <th>
-               <div class="form-group">
-                 <input type="text" class="form-control" name="courseKlient" ng-model="course.klient" ng-change="filter( course )" placeholder="Klient">
                </div>
              </th>
              <th>
@@ -73,13 +72,13 @@
            </tr>
            <tr>
              <th>
-               Id
+               Klient
+             </th>
+             <th>
+               Id kursu
              </th>
              <th>
                Status
-             </th>
-             <th>
-               Klient
              </th>
              <th>
                Osob
@@ -108,9 +107,9 @@
            </tr>
          </thead>
          <tr ng-repeat="course in courses" ng-click="preview( course )">
+          <td>{{ course.klient }}</td>
           <td>{{ course.id }}</td>
           <td>{{ course.status_kursu }}</td>
-          <td>{{ course.klient }}</td>
           <td>{{ course.osob }}</td>
           <td>{{ course.taksowkarz }}</td>
           <td>{{ course.data }}</td>
