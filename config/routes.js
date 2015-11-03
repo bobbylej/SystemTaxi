@@ -54,6 +54,9 @@ module.exports.routes = {
   'GET /logout_employee': 'EmployeeController.logout',
 
   'GET /courses': 'CoursesController.index',
+  'GET /actual_courses': 'ActualCoursesController.index',
+  'GET /edit_course': 'CourseController.index',
+  'GET /taxi_free': 'TaxiFreeController.index',
 
   // '/': {
   //   view: 'homepage'

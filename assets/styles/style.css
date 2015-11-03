@@ -1,3 +1,11 @@
+.wrapper {
+  background-color: #eee;
+}
+
+.container-fluid {
+  margin-top: 50px;
+}
+
 .navbar-right li * {
   padding: 15px;
   color: #ffffff;
@@ -49,6 +57,36 @@ nav.sidebar li a {
 }
 
 #content {
+  position: relative;
   width: 85%;
   float: right;
+}
+
+nav.topbar {
+  position: absolute;
+  top: -40px;
+  right: 10px;
+  height: 40px;
+}
+
+nav.topbar ul {
+  list-style: none;
+
+}
+
+nav.topbar ul li {
+  display: inline-block;
+  padding: 10px;
+  width: 100px;
+  height: 40px;
+  background-color: #eee;
+  color: #333;
+  text-align: center;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+nav.topbar ul li:hover, nav.topbar ul .active li {
+  background-color: #f39c12;
+  color: #fff;
 }

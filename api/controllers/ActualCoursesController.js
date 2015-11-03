@@ -31,14 +31,17 @@ module.exports = {
 
       var data = CourseModel.find( {
         where: {
-          status_kursu: { 'contains': status_kursu },
+          or : [
+            { status_kursu: 'realizowany' },
+            { status_kursu: 'oczekuje na realizacje' }
+          ],
           id: { 'contains': id },
           taksowkarz: { 'contains': taksowkarz },
           klient: { 'contains': klient },
           osob: { '>=': osob_od },
           osob: { '<=': osob_do },
           anulowane: { 'contains': anulowane }
-        }, skip: pomin, limit: limit } )
+        }, skip: pomin, limit: limit, sort: 'status_kursu ASC' } )
         .populate('adres_odbioru').populate('adres_dostraczenia').populate('zmieniajacy').exec( function( err, courses ) {
 
 
@@ -96,22 +99,17 @@ module.exports = {
           }
 
           courses = courses.filter( function( elem ) {
-            var result = true;
             if( data_od && data_od != '' ) {
               if( new Date( data_od ) <= new Date( elem.data ) ) {
-                result = result && true;
+                return true;
               }
-              else {
-                return false;
-              }
+              return false;
             }
             if( data_do && data_do != '' ) {
               if( new Date( data_do ) >= new Date( elem.data ) ) {
-                result = result && true;
+                return true;
               }
-              else {
-                return false;
-              }
+              return false;
             }
 
             var filtersTimes = [ [ czas_zamowienia_od, czas_zamowienia_do, elem.czas_zamowienia ],
@@ -128,11 +126,9 @@ module.exports = {
                 data2.setHours(czas2[0]);
                 data2.setMinutes(czas2[1]);
                 if( data1 <= data2 ) {
-                  result = result && true;
+                  return true;
                 }
-                else {
-                  return false;
-                }
+                return false;
               }
               if( filtersTimes[ i ][ 1 ] && filtersTimes[ i ][ 1 ] != '' ) {
                 var data1 = new Date, data2 = new Date,
@@ -143,15 +139,13 @@ module.exports = {
                 data2.setHours(czas2[ 0 ]);
                 data2.setMinutes(czas2[ 1 ]);
                 if( data1 >= data2 ) {
-                  result = result && true;
+                  return true;
                 }
-                else {
-                  return false;
-                }
+                return false;
               }
             }
 
-            return result;
+            return true;
           } );
 
           res.send( courses );

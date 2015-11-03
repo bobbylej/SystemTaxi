@@ -1,13 +1,10 @@
-DashboardModule.controller( 'CoursesController', ['$scope', '$http', '$filter', 'toastr', function( $scope, $http, $filter ) {
+DashboardModule.controller( 'ActualCoursesController', ['$scope', '$http', '$filter', 'toastr', function( $scope, $http, $filter ) {
 
   var allCourses = [];
 
-  $( '.sidebar .menu a' ).removeClass( 'active' );
-  $( '.sidebar .menu .courses-link' ).addClass( 'active' );
-  $( '.topbar .menu a' ).removeClass( 'active' );
-  $( '.topbar .menu .courses-link' ).addClass( 'active' );
+  $scope.edit = {};
 
-  $scope.currentPage = 1;
+  $scope.currentPageActualCourses = 1;
   //fillPagination( $scope.currentPage );
   filterCourses( [] );
 
@@ -27,27 +24,38 @@ DashboardModule.controller( 'CoursesController', ['$scope', '$http', '$filter', 
 
   $scope.changePage = function( page, course ) {
     console.log( page, course );
-    $scope.currentPage = page;
+    $scope.currentPageActualCourses = page;
     $scope.filter( course );
   }
 
   $scope.preview = function( course ) {
-    $scope.preview.course = course;
+    $scope.preview.actualCourse = course;
     $( '.preview-course' ).slideDown();
   }
 
+  $scope.checkActualCourse = function( course ) {
+    $scope.edit.course = course;
+    $( '.edit-course' ).slideDown();
+    console.log( course );
+  }
+
+  $scope.editActualCourse = function() {
+    if( $scope.edit.course ) {
+      
+    }
+  }
+
+
 
   function filterCourses( filters ) {
-    filterReq = '?strona=' + $scope.currentPage;
+    filterReq = '?strona=' + $scope.currentPageActualCourses;
     filters.forEach( function( filter ) {
       filterReq += '&' + filter.key + '=' + filter.value;
     } );
-    $http.get("/courses" + filterReq )
+    $http.get("/actual_courses" + filterReq )
     .success( function( response ) {
-      //allCourses = response;
-      //$scope.courses = getCourses( 1 );
-      $scope.courses = response;
-      console.log( 'Courses to show', $scope.courses );
+      $scope.actualCourses = response;
+      console.log( 'Actual Courses to show', $scope.actualCourses );
     });
   }
 

@@ -91,6 +91,10 @@ module.exports = {
       model: 'TaxiStateModel'
     },
 
+    auto: {
+      model: 'TaxiAutoModel'
+    },
+
     nr_konta_bankowego: {
       type: 'integer',
       size: 26

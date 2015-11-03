@@ -43,6 +43,11 @@ module.exports = {
     standard: {
       model: 'TaxiAutoStandardModel',
       required: true
+    },
+
+    osob: {
+      type: 'integer',
+      required: true
     }
 
   }

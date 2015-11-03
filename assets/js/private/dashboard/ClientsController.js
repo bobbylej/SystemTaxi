@@ -7,7 +7,7 @@ DashboardModule.controller( 'ClientsController', ['$scope', '$http', '$filter', 
 
   $scope.currentPage = 1;
   $scope.course = {};
-  $scope.course.klient = -1;
+  $scope.course.klient = '';
   //fillPagination( $scope.currentPage );
 
   $scope.filter = function( course ) {

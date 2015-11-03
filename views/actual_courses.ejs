@@ -1,0 +1,66 @@
+<div class="content content-courses">
+<div class="jumbotron text-center" ng-controller="ActualCoursesController">
+
+   <h1>Aktualne i przyszłe kursy</h1>
+   <div class="table-filter">
+     <form class="form-inline">
+     </form>
+  </div>
+  <div class="table-responsive table-courses">
+       <table class="table table-bordered table-striped table-hover">
+         <thead>
+           <tr>
+             <th>
+             </th>
+             <th>
+               Id
+             </th>
+             <th>
+               Status
+             </th>
+             <th>
+               Klient
+             </th>
+             <th>
+               Taksowkarz
+             </th>
+             <th>
+               Czas zamowienia
+             </th>
+             <th>
+               Czas odbioru
+             </th>
+           </tr>
+         </thead>
+         <tr ng-repeat="actualCourse in actualCourses">
+          <td>
+            <div ng-if="actualCourse.status_kursu == 'oczekuje na realizacje'">
+              <input type="radio" name="edit-course" ng-click="checkActualCourse( actualCourse )">
+            </div>
+          </td>
+          <td>{{ actualCourse.id }}</td>
+          <td>{{ actualCourse.status_kursu }}</td>
+          <td>{{ actualCourse.klient }}</td>
+          <td>{{ actualCourse.taksowkarz }}</td>
+          <td>{{ actualCourse.czas_zamowienia }}</td>
+          <td>{{ actualCourse.czas_odbioru }}</td>
+         </tr>
+       </table>
+       <h3 ng-show="!actualCourses.length">Brak kursow</h3>
+
+       <div class="edit-course">
+         <a href="/courses/edit?id={{ edit.course.id }}" class="btn" ng-click="editActualCourse()">Modyfikuj</a>
+         <button class="btn" ng-click="deleteActualCourse()">Usuń</button>
+       </div>
+
+       <div class="pagination">
+         <button id="prev-page" ng-click="changePage( currentPage - 1, actualCourse )"> < </button>
+         <button id="prev-page" ng-click="changePage( currentPage - 1, actualCourse )"> {{ currentPageActualCourses - 1 }} </button>
+         <button id="prev-page" ng-click="changePage( currentPage, actualCourse )"> {{ currentPageActualCourses }} </button>
+         <button id="prev-page" ng-click="changePage( currentPage + 1, actualCourse )"> {{ currentPageActualCourses + 1 }} </button>
+         <button id="next-page" ng-click="changePage( currentPage + 1, actualCourse )"> > </button>
+       </div>
+
+   </div>
+</div>
+</div>
