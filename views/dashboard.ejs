@@ -57,19 +57,21 @@
     <div class="container-fluid">
 
 
-      <nav class="sidebar">
-        <ul class="menu">
-          <li>Nowy kurs</li>
-          <a class="courses-link" href="/#/courses"><li>Kursy</li></a>
-          <a class="clients-link" href="/#/clients"><li>Klienci</li></a>
-          <li>Taksowkarze</li>
-          <li>Mapa</li>
-        </ul>
-      </nav>
 
       <div id="content">
         <div ng-view></div>
       </div>
+
+
+            <nav class="sidebar">
+              <ul class="menu">
+                <li>Nowy kurs</li>
+                <a class="courses-link" href="/#/courses"><li>Kursy</li></a>
+                <a class="clients-link" href="/#/clients"><li>Klienci</li></a>
+                <li>Taksowkarze</li>
+                <li>Mapa</li>
+              </ul>
+            </nav>
 
       <%- include actual_courses %>
     </div>

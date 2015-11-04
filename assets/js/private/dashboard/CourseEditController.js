@@ -10,9 +10,9 @@ DashboardModule.controller( 'CourseEditController', ['$scope', '$http', '$filter
   getWaitingCourses();
   getFreeTaxi();
 
-  $scope.chooseCourse = function( id ){
-    $scope.id = id;
-    getEditCourse( id );
+  $scope.chooseCourse = function( course ){
+    $scope.id = course.id;
+    getEditCourse( course.id );
   }
 
   function getWaitingCourses() {
