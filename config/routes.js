@@ -58,6 +58,8 @@ module.exports.routes = {
   'GET /edit_course': 'CourseController.index',
   'GET /taxi_free': 'TaxiFreeController.index',
 
+  'POST /edit_course': 'CourseController.save',
+
   // '/': {
   //   view: 'homepage'
   // }

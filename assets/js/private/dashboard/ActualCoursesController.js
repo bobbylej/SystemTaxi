@@ -8,6 +8,7 @@ DashboardModule.controller( 'ActualCoursesController', ['$scope', '$http', '$fil
   //fillPagination( $scope.currentPage );
   filterCourses( [] );
 
+
   $scope.filter = function( course ) {
     console.log( course );
     var filters = [];
@@ -36,15 +37,9 @@ DashboardModule.controller( 'ActualCoursesController', ['$scope', '$http', '$fil
   $scope.checkActualCourse = function( course ) {
     $scope.edit.course = course;
     $( '.edit-course' ).slideDown();
+    $( '#course-radio-'+course.id ).attr('checked', 'checked');
     console.log( course );
   }
-
-  $scope.editActualCourse = function() {
-    if( $scope.edit.course ) {
-      
-    }
-  }
-
 
 
   function filterCourses( filters ) {

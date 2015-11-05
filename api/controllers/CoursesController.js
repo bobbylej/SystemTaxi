@@ -33,24 +33,40 @@ module.exports = {
         where: {
           status_kursu: { 'contains': status_kursu },
           id: { 'contains': id },
-          taksowkarz: { 'contains': taksowkarz },
           klient: { 'contains': klient },
-          osob: { '>=': osob_od },
-          osob: { '<=': osob_do },
+          osob: { '>=': osob_od, '<=': osob_do },
           anulowane: { 'contains': anulowane }
         }, skip: pomin, limit: limit } )
         .populate('adres_odbioru').populate('adres_dostraczenia').populate('zmieniajacy').exec( function( err, courses ) {
 
 
           courses = courses.filter( function( elem ) {
+            if( taksowkarz != '' ) {
+              if( elem.taksowkarz ) {
+                if( ( elem.taksowkarz.toString() ).indexOf( taksowkarz.toString() ) != -1 ) {
+                  //return true;
+                }
+                else {
+                  return false
+                }
+              }
+              else {
+                return false;
+              }
+            }
             if( zmieniajacy != '' ) {
               if( elem.zmieniajacy ) {
                 var zmieniajacy_nazwa = elem.zmieniajacy.login + ': ' + elem.zmieniajacy.imie + elem.zmieniajacy.nazwisko;
                 if( zmieniajacy_nazwa.indexOf( zmieniajacy ) != -1 ) {
-                  return true;
+                  //return true;
+                }
+                else {
+                  return false
                 }
               }
-              return false;
+              else {
+                return false;
+              }
             }
             return true;
           } );

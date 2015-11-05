@@ -20,8 +20,7 @@ module.exports = {
     },
 
     taksowkarz: {
-      model: 'TaxiModel',
-      required: true
+      model: 'TaxiModel'
     },
 
     klient: {
@@ -62,8 +61,7 @@ module.exports = {
     },
 
     adres_dostraczenia: {
-      model: 'AddressModel',
-      required: true
+      model: 'AddressModel'
     },
 
     status_kursu: {

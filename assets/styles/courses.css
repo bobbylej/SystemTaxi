@@ -2,6 +2,10 @@
   display: none;
 }
 
+th .form-group {
+  margin: 0;
+}
+
 th input.form-control {
   font-size: 12px;
   padding: 6px;
@@ -9,4 +13,53 @@ th input.form-control {
 
 th input.form-control[type='number'] {
   min-width: 50px;
+}
+
+th input.form-control[type='radio'] {
+  width: auto;
+  height: auto;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.table-courses tbody tr {
+  cursor: pointer;
+}
+
+.table-courses tbody tr:hover {
+  background-color: #FFD584;
+}
+
+.edit-container {
+  display: none;
+}
+
+.edit-container .inputs {
+  display: inline-block;
+  width: 50%;
+  float: left;
+  text-align: right;
+  padding: 20px;
+}
+
+.edit-container .inputs label, .edit-container .inputs input, .edit-container .inputs select {
+  display: inline;
+  width: 50%;
+}
+
+.edit-container input[type="submit"] {
+  display: inline-block;
+  width: 50%;
+  height: 285px;
+  float: right;
+  padding: 20px;
+  font-size: 45px;
+}
+
+.edit-course {
+  display: none;
+}
+
+.content-actual-courses {
+    clear: both;
 }

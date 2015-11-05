@@ -7,12 +7,24 @@ DashboardModule.controller( 'CourseEditController', ['$scope', '$http', '$filter
   $( '.topbar .menu .course-edit-link' ).addClass( 'active' );
 
   $scope.course = {};
-  getWaitingCourses();
+  var id = getUrlParams( 'id' )
+  if( id ) {
+    getEditCourse( id );
+  }
+  else {
+    getWaitingCourses();
+  }
   getFreeTaxi();
 
-  $scope.chooseCourse = function( course ){
+  $scope.chooseCourse = function( course ) {
     $scope.id = course.id;
     getEditCourse( course.id );
+  }
+
+  $scope.editCourse = function( course ) {
+    $http.post( "/edit_course", { id: course.id, taksowkarz: course.taksowkarz.id } ).success( function(data, status) {
+        window.location.href = '#/courses';
+    } )
   }
 
   function getWaitingCourses() {
@@ -30,6 +42,8 @@ DashboardModule.controller( 'CourseEditController', ['$scope', '$http', '$filter
     .success( function( response ) {
       $scope.course = response;
       console.log( 'Course to show', $scope.course );
+      jQuery( '.choose-container' ).slideUp();
+      jQuery( '.edit-container' ).slideDown();
     });
   }
 

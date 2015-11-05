@@ -51,5 +51,23 @@ module.exports = {
           res.end();
       } );
       return data;
+  },
+
+  save: function( req, res ) {
+    var id = req.body.id != undefined ? req.body.id : '';
+    var taksowkarz = req.body.taksowkarz != undefined ? req.body.taksowkarz : '';
+
+    console.log( req.body );
+
+    var data = CourseModel.findOne( { id: id } ).populate('adres_odbioru').populate('adres_dostraczenia').populate('zmieniajacy').exec( function( err, course ) {
+
+      if( course ) {
+        course.taksowkarz = taksowkarz
+        course.save( function( error ) {
+          res.send( course );
+        } )
+      }
+    } );
+    return data;
   }
 };

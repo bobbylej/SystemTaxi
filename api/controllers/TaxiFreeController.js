@@ -12,7 +12,7 @@ module.exports = {
       var standard = req.query.standard != undefined ? req.query.standard : '';
       var osob = req.query.osob != undefined ? req.query.osob : 0;
 
-      var data = TaxiModel.find( { stan: 'wolny' } )
+      var data = TaxiModel.find( { or: [ { stan: 'wolny'}, { stan: 'przypisany do kursu' } ] } )
         .populate('auto').exec( function( err, taxi ) {
 
           taxi = taxi.filter( function( elem ) {

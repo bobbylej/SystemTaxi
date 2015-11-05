@@ -1,4 +1,4 @@
-<div class="content content-courses">
+<div class="content content-actual-courses">
 <div class="jumbotron text-center" ng-controller="ActualCoursesController">
 
    <h1>Aktualne i przyszłe kursy</h1>
@@ -6,7 +6,7 @@
      <form class="form-inline">
      </form>
   </div>
-  <div class="table-responsive table-courses">
+  <div class="table-responsive table-courses table-actual-courses">
        <table class="table table-bordered table-striped table-hover">
          <thead>
            <tr>
@@ -32,10 +32,10 @@
              </th>
            </tr>
          </thead>
-         <tr ng-repeat="actualCourse in actualCourses">
+         <tr ng-repeat="actualCourse in actualCourses" ng-click="checkActualCourse( actualCourse )">
           <td>
-            <div ng-if="actualCourse.status_kursu == 'oczekuje na realizacje'">
-              <input type="radio" name="edit-course" ng-click="checkActualCourse( actualCourse )">
+            <div ng-if="actualCourse.status_kursu == 'oczekuje'">
+              <input type="radio" id="course-radio-{{ actualCourse.id }}" name="edit-course" ng-click="checkActualCourse( actualCourse )">
             </div>
           </td>
           <td>{{ actualCourse.id }}</td>
@@ -49,17 +49,17 @@
        <h3 ng-show="!actualCourses.length">Brak kursow</h3>
 
        <div class="edit-course">
-         <a href="/courses/edit?id={{ edit.course.id }}" class="btn" ng-click="editActualCourse()">Modyfikuj</a>
-         <button class="btn" ng-click="deleteActualCourse()">Usuń</button>
+         <a href="#/courses/edit?id={{ edit.course.id }}" class="btn btn-taxi" ng-click="editActualCourse()">Modyfikuj</a>
+         <button class="btn btn-taxi" ng-click="deleteActualCourse()">Usuń</button>
        </div>
 
-       <div class="pagination">
-         <button id="prev-page" ng-click="changePage( currentPage - 1, actualCourse )"> < </button>
-         <button id="prev-page" ng-click="changePage( currentPage - 1, actualCourse )"> {{ currentPageActualCourses - 1 }} </button>
-         <button id="prev-page" ng-click="changePage( currentPage, actualCourse )"> {{ currentPageActualCourses }} </button>
-         <button id="prev-page" ng-click="changePage( currentPage + 1, actualCourse )"> {{ currentPageActualCourses + 1 }} </button>
-         <button id="next-page" ng-click="changePage( currentPage + 1, actualCourse )"> > </button>
-       </div>
+       <ul class="pagination" ng-show="actualCourses.length > 15">
+         <li><a id="prev-page" ng-click="changePage( currentPage - 1, course )"> < </a></li>
+         <li><a id="prev-page" ng-click="changePage( currentPage - 1, course )"> {{ currentPage - 1 }} </a></li>
+         <li><a id="prev-page" ng-click="changePage( currentPage, course )"> {{ currentPage }} </a></li>
+         <li><a id="prev-page" ng-click="changePage( currentPage + 1, course )"> {{ currentPage + 1 }} </a></li>
+         <li><a id="next-page" ng-click="changePage( currentPage + 1, course )"> > </a></li>
+       </ul>
 
    </div>
 </div>
