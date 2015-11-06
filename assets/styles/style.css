@@ -6,11 +6,6 @@ h1 {
   background-color: #eee;
 }
 
-#content {
-  background-color: #eee;
-  min-height: 500px;
-}
-
 .container-fluid {
   margin-top: 50px;
 }
@@ -69,6 +64,8 @@ nav.sidebar li a {
   position: relative;
   width: 85%;
   float: right;
+  background-color: #eee;
+  min-height: 500px;
 }
 
 nav.topbar {
@@ -112,4 +109,8 @@ nav.topbar ul li:hover, nav.topbar ul .active li {
 .btn-taxi:hover {
   background-color: #f39c12;
   color: #fff;
+}
+
+table tbody tr:hover {
+  background-color: #FFD584 !important;
 }

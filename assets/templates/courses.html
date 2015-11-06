@@ -4,18 +4,13 @@
 <nav class="topbar">
   <ul class="menu">
     <a class="course-edit-link" href="/#/courses/edit"><li>Modyfikuj</li></a>
-    <a class="clients-link" href="/#/courses"><li>Stworz</li></a>
+    <a class="course-create-link" href="/#/courses/create"><li>Stworz</li></a>
     <a class="courses-link" href="/#/courses"><li>Lista</li></a>
   </ul>
 </nav>
 
 <div class="jumbotron text-center" ng-controller="CoursesController">
 
-   <h1>Kursy</h1>
-   <div class="table-filter">
-     <form class="form-inline">
-     </form>
-  </div>
   <div class="table-responsive table-courses">
        <table class="table table-bordered table-striped table-hover">
          <thead>
@@ -144,7 +139,7 @@
        </table>
        <h3 ng-show="!courses.length">Brak kursow</h3>
 
-       <ul class="pagination">
+       <ul class="pagination" ng-show="courses.length > 15">
          <li><a id="prev-page" ng-click="changePage( currentPage - 1, course )"> < </a></li>
          <li><a id="prev-page" ng-click="changePage( currentPage - 1, course )"> {{ currentPage - 1 }} </a></li>
          <li><a id="prev-page" ng-click="changePage( currentPage, course )"> {{ currentPage }} </a></li>

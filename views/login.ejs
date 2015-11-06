@@ -9,7 +9,7 @@
           </button>
 
           <!-- This is the brand on the left-hand side. -->
-          <a class="navbar-brand" href="/#"> activityOverlord</a>
+          <a class="navbar-brand" href="/#"> SystemTaxi</a>
           <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
             <form ng-submit="submitLoginForm()" class="navbar-form navbar-right">
 
@@ -17,12 +17,12 @@
                   <input ng-model="loginForm.login" type="text" placeholder="Login" name="login" class="form-control">
               </div>
               <div class="form-group">
-                  <input ng-model="loginForm.password" type="password" placeholder="Password" name="password" class="form-control">
+                  <input ng-model="loginForm.password" type="password" placeholder="Hasło" name="password" class="form-control">
               </div>
               <button type="submit" class="btn btn-success">
-                <span ng-show="!loginForm.loading">Sign in</span>
+                <span ng-show="!loginForm.loading">Zaloguj</span>
                 <span ng-show="loginForm.loading" class="fa fa-spinner"></span>
-                <span ng-show="loginForm.loading">Signing in...</span>
+                <span ng-show="loginForm.loading">Logowanie...</span>
               </button>
               <input type="hidden" name="_csrf" value="<%= _csrf %>" />
             </form>
@@ -44,9 +44,12 @@
     <script src="/js/genetic.js"></script>
     <script src="/js/private/dashboard/ActualCoursesController.js"></script>
     <script src="/js/private/dashboard/ClientsController.js"></script>
+    <script src="/js/private/dashboard/CourseCreateController.js"></script>
     <script src="/js/private/dashboard/CourseEditController.js"></script>
     <script src="/js/private/dashboard/CoursesController.js"></script>
     <script src="/js/private/dashboard/DashboardController.js"></script>
+    <script src="/js/private/dashboard/TaxiController.js"></script>
+    <script src="/js/private/dashboard/TaxiWorkController.js"></script>
     <script src="/js/public/homepage/HomepageController.js"></script>
     <script src="/js/public/signup/SignupController.js"></script>
     <script src="/js/public/signup_employee/SignupEmployeeController.js"></script>

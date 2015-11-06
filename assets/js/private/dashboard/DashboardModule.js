@@ -20,9 +20,24 @@ DashboardModule.config(function($routeProvider, $locationProvider) {
       controller  : 'CourseEditController'
   })
 
+  .when('/courses/create', {
+      templateUrl : '/templates/course_create.html',
+      controller  : 'CourseCreateController'
+  })
+
   .when('/clients', {
       templateUrl : '/templates/clients.html',
       controller  : 'ClientsController'
+  })
+
+  .when('/taxi', {
+      templateUrl : '/templates/taxi.html',
+      controller  : 'TaxiController'
+  })
+
+  .when('/taxi/in_work', {
+      templateUrl : '/templates/taxi.html',
+      controller  : 'TaxiWorkController'
   });
 
   // use the HTML5 History API

@@ -3,14 +3,21 @@ DashboardModule.controller( 'ActualCoursesController', ['$scope', '$http', '$fil
   var allCourses = [];
 
   $scope.edit = {};
+  $scope.course = {};
 
   $scope.currentPageActualCourses = 1;
   //fillPagination( $scope.currentPage );
   filterCourses( [] );
 
+  $( document ).on( 'interfaceUpdate', function() {
+    console.log( 'Actual Courses Update' );
+    $scope.filter( $scope.course );
+  } );
+
 
   $scope.filter = function( course ) {
     console.log( course );
+    $scope.course = course;
     var filters = [];
     for( var key in course ) {
       if( course[ key ] ) {

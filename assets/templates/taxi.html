@@ -1,0 +1,90 @@
+<div class="content content-courses">
+
+
+<nav class="topbar">
+  <ul class="menu">
+    <a class="taxi-in-work-link" href="/#/taxi/in_work"><li>W pracy</li></a>
+    <a class="taxi-link" href="/#/taxi"><li>Wszyscy</li></a>
+  </ul>
+</nav>
+
+<div class="jumbotron text-center">
+
+  <div class="table-responsive table-taxi">
+       <table class="table table-bordered table-striped table-hover">
+         <thead>
+           <tr>
+             <th>
+               <div class="form-group">
+                 <input type="number" class="form-control" name="taxiId" ng-model="taxi.id" ng-change="filter( taxi )" placeholder="Id">
+               </div>
+             </th>
+             <th>
+               <div class="form-group">
+                 <input type="text" class="form-control" name="taxiStan" ng-model="taxi.stan" ng-change="filter( taxi )" placeholder="Stan">
+               </div>
+             </th>
+             <th>
+               <div class="form-group">
+                 <input type="text" class="form-control" name="taxiStatus" ng-model="taxi.status" ng-change="filter( taxi )" placeholder="Status">
+               </div>
+             </th>
+             <th>
+               <div class="form-group">
+                 <input type="text" class="form-control" name="taxiImieNazwisko" ng-model="taxi.imie_nazwisko" ng-change="filter( taxi )" placeholder="Imię i nazwisko">
+               </div>
+             </th>
+             <th>
+               <div class="form-group">
+                 <input type="text" class="form-control" name="taxiStandard" ng-model="taxi.standard" ng-change="filter( taxi )" placeholder="Standard">
+               </div>
+             </th>
+             <th>
+               <div class="form-group">
+                 <input type="number" class="form-control" name="taxiOsob" ng-model="taxi.osob" ng-change="filter( taxi )" placeholder="Ile">
+               </div>
+             </th>
+           </tr>
+           <tr>
+             <th>
+               Id
+             </th>
+             <th>
+               Stan
+             </th>
+             <th>
+               Status
+             </th>
+             <th>
+               Imię i nazwisko
+             </th>
+             <th>
+               Standard auta
+             </th>
+             <th>
+               Osob
+             </th>
+           </tr>
+         </thead>
+         <tr ng-repeat="taxi in allTaxi" ng-click="preview( taxi )">
+          <td>{{ taxi.id }}</td>
+          <td>{{ taxi.stan }}</td>
+          <td>{{ taxi.status }}</td>
+          <td>{{ taxi.imie }} {{ taxi.nazwisko }}</td>
+          <td>{{ taxi.auto.standard }}</td>
+          <td>{{ taxi.auto.osob }}</td>
+        </tr>
+       </table>
+       <h3 ng-show="!allTaxi.length">Brak kursow</h3>
+
+       <ul class="pagination" ng-show="allTaxi.length > 15">
+         <li><a id="prev-page" ng-click="changePage( currentPage - 1, taxi )"> < </a></li>
+         <li><a id="prev-page" ng-click="changePage( currentPage - 1, taxi )"> {{ currentPage - 1 }} </a></li>
+         <li><a id="prev-page" ng-click="changePage( currentPage, taxi )"> {{ currentPage }} </a></li>
+         <li><a id="prev-page" ng-click="changePage( currentPage + 1, taxi )"> {{ currentPage + 1 }} </a></li>
+         <li><a id="next-page" ng-click="changePage( currentPage + 1, taxi )"> > </a></li>
+       </ul>
+
+   </div>
+</div>
+</div>

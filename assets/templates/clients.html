@@ -122,13 +122,13 @@
        </table>
        <h3 ng-show="!courses.length">Brak kursow</h3>
 
-       <div class="pagination">
-         <button id="prev-page" ng-click="changePage( currentPage - 1, course )"> < </button>
-         <button id="prev-page" ng-click="changePage( currentPage - 1, course )"> {{ currentPage - 1 }} </button>
-         <button id="prev-page" ng-click="changePage( currentPage, course )"> {{ currentPage }} </button>
-         <button id="prev-page" ng-click="changePage( currentPage + 1, course )"> {{ currentPage + 1 }} </button>
-         <button id="next-page" ng-click="changePage( currentPage + 1, course )"> > </button>
-       </div>
+       <ul class="pagination" ng-show="courses.length > 15">
+         <li><a id="prev-page" ng-click="changePage( currentPage - 1, course )"> < </a></li>
+         <li><a id="prev-page" ng-click="changePage( currentPage - 1, course )"> {{ currentPage - 1 }} </a></li>
+         <li><a id="prev-page" ng-click="changePage( currentPage, course )"> {{ currentPage }} </a></li>
+         <li><a id="prev-page" ng-click="changePage( currentPage + 1, course )"> {{ currentPage + 1 }} </a></li>
+         <li><a id="next-page" ng-click="changePage( currentPage + 1, course )"> > </a></li>
+       </ul>
 
        <div class="preview-course">
          <h3>Podgląd kursu:</h3>

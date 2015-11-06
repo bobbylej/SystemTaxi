@@ -68,5 +68,13 @@ module.exports = {
       model: 'CoursesStatusModel',
       required: true
     },
+
+    standard_auta: {
+      model: 'TaxiAutoStandardModel'
+    },
+
+    haslo_anulowania: {
+      type: 'string'
+    }
   }
 };

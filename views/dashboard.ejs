@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="DashboardModule">
   <head>
-    <title>Activity Overlord | Welcome back, <%= me.login %>!</title>
+    <title>SystemTaxi - <%= me.login %>!</title>
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!--STYLES-->
@@ -44,7 +44,7 @@
             <p>{{ login }}</p>
           </li>
           <li>
-            <a href="/logout_employee">sign-out</a>
+            <a href="/logout_employee">wyloguj</a>
           </li>
           <!-- <a ng-controller="signinController" class="btn btn-default navbar-btn navbar-right" href="#" ng-if="!isAuthenticated">sign-in</a> -->
           <!-- Using ng-show instead of ng-if because we need this mark-up to be in the dom when signup controller
@@ -65,10 +65,10 @@
 
             <nav class="sidebar">
               <ul class="menu">
-                <li>Nowy kurs</li>
+                <a class="courses-link" href="/#/courses/create"><li>Nowy kurs</li></a>
                 <a class="courses-link" href="/#/courses"><li>Kursy</li></a>
                 <a class="clients-link" href="/#/clients"><li>Klienci</li></a>
-                <li>Taksowkarze</li>
+                <a class="taxi-link" href="/#/taxi"><li>Taksowkarze</li></a>
                 <li>Mapa</li>
               </ul>
             </nav>
@@ -89,9 +89,12 @@
     <script src="/js/genetic.js"></script>
     <script src="/js/private/dashboard/ActualCoursesController.js"></script>
     <script src="/js/private/dashboard/ClientsController.js"></script>
+    <script src="/js/private/dashboard/CourseCreateController.js"></script>
     <script src="/js/private/dashboard/CourseEditController.js"></script>
     <script src="/js/private/dashboard/CoursesController.js"></script>
     <script src="/js/private/dashboard/DashboardController.js"></script>
+    <script src="/js/private/dashboard/TaxiController.js"></script>
+    <script src="/js/private/dashboard/TaxiWorkController.js"></script>
     <script src="/js/public/homepage/HomepageController.js"></script>
     <script src="/js/public/signup/SignupController.js"></script>
     <script src="/js/public/signup_employee/SignupEmployeeController.js"></script>

@@ -53,12 +53,19 @@ module.exports.routes = {
   'PUT /login_employee': 'EmployeeController.login',
   'GET /logout_employee': 'EmployeeController.logout',
 
-  'GET /courses': 'CoursesController.index',
-  'GET /actual_courses': 'ActualCoursesController.index',
-  'GET /edit_course': 'CourseController.index',
-  'GET /taxi_free': 'TaxiFreeController.index',
+  'GET /courses': 'CourseController.getAllCourses',
+  'GET /actual_courses': 'CourseController.getActualCourses',
+  'GET /edit_course': 'CourseController.getOne',
+  'POST /edit_course': 'CourseController.edit',
+  'POST /create_course': 'CourseController.create',
+  'POST /update_course': 'CourseController.update',
 
-  'POST /edit_course': 'CourseController.save',
+  'GET /taxi': 'TaxiController.getAll',
+  'GET /taxi_free': 'TaxiController.getFree',
+  'GET /taxi_work': 'TaxiController.getAllInWork',
+
+  'GET /taxi_auto_standars': 'TaxiAutoStandardController.getAll',
+
 
   // '/': {
   //   view: 'homepage'

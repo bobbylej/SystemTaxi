@@ -63,3 +63,7 @@ th input.form-control[type='radio'] {
 .content-actual-courses {
     clear: both;
 }
+
+.password-container {
+  display: none;
+}
