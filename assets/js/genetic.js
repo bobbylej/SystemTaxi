@@ -1,8 +1,9 @@
+
 var Taxi = function() {
 	this.road = [];
 
 }
-
+/*
 var taxi1 = new Taxi();
 var taxi2 = new Taxi();
 var taxi3 = new Taxi();
@@ -174,6 +175,7 @@ taxi12.road[12] = 55;
 taxi12.road[13] = 4;
 
 var taxiArray = [ taxi1, taxi2, taxi3, taxi4, taxi5, taxi6, taxi7, taxi8, taxi9, taxi10, taxi11, taxi12 ];
+*/
 
 function cloneArray( array ) {
 	var newArray = [];
@@ -303,7 +305,7 @@ Population.prototype.findBest = function() {
 	return best;
 };
 
-Population.prototype.generation = function() {
+Population.prototype.generation = function( taxiArray ) {
 
 	// create new population
 	var newMembers = [];
@@ -337,7 +339,7 @@ Population.prototype.generation = function() {
   this.generationNumber++;
 };
 
-Population.prototype.start = function( amount ) {
+Population.prototype.start = function( amount, taxiArray ) {
   for ( var i = 0; i < this.members.length; i++ ) {
       this.members[i].countCost( taxiArray );
   }
@@ -345,7 +347,7 @@ Population.prototype.start = function( amount ) {
 	console.log( 'Best in ' + this.generationNumber + ':', this.best );
 
 	while( this.generationNumber < amount || this.best.cost <= 0 ) {
-		this.generation();
+		this.generation( taxiArray );
 		console.log( 'Best in ' + this.generationNumber + ':', this.best );
 	}
 }
@@ -358,7 +360,7 @@ var GeneticAlgorithm = function( clientsArray, taxiArray, populationSize, mutate
 }
 
 GeneticAlgorithm.prototype.start = function( ) {
-	this.population.start( this.amount );
+	this.population.start( this.amount, this.taxiArray );
 }
 
 /*

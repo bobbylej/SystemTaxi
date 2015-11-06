@@ -32,6 +32,8 @@ var jsFilesToInject = [
   'js/dependencies/angular*.js',
   'js/dependencies/**/*.js',
 
+  'js/genetic.js',
+
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   'js/public/signup_employee/SignupEmployeeModule.js',

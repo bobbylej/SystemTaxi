@@ -25,6 +25,11 @@ DashboardModule.config(function($routeProvider, $locationProvider) {
       controller  : 'CourseCreateController'
   })
 
+  .when('/courses/planning', {
+      templateUrl : '/templates/courses.html',
+      controller  : 'PlanningCoursesController'
+  })
+
   .when('/clients', {
       templateUrl : '/templates/clients.html',
       controller  : 'ClientsController'
