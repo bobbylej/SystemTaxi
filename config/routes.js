@@ -56,9 +56,11 @@ module.exports.routes = {
   'GET /courses': 'CourseController.getAllCourses',
   'GET /actual_courses': 'CourseController.getActualCourses',
   'GET /edit_course': 'CourseController.getOne',
+  'GET /planning_courses': 'CourseController.getPlanningCourses',
   'POST /edit_course': 'CourseController.edit',
   'POST /create_course': 'CourseController.create',
   'POST /update_course': 'CourseController.update',
+  'POST /update_taxi_course': 'CourseController.updateTaxi',
 
   'GET /taxi': 'TaxiController.getAll',
   'GET /taxi_free': 'TaxiController.getFree',

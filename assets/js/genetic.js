@@ -283,8 +283,9 @@ Solution.prototype.countCost = function( taxiArray ) {
 var Population = function( genes, size, mutateProb ) {
     this.members = [];
     this.generationNumber = 0;
-		this.best = undefined;
+		this.best = { cost: Number.MAX_VALUE };
 		this.mutateProb = mutateProb;
+		this.size = size;
     while (size--) {
 			var tempArray = generateArray( genes );
       var solution = new Solution( tempArray );
@@ -292,10 +293,14 @@ var Population = function( genes, size, mutateProb ) {
     }
 };
 
-Population.prototype.findBest = function() {
+Population.prototype.findBest = function( taxiArray ) {
   var best = undefined;
 	var bestCost = Number.MAX_VALUE;
 	for( var i = 0; i < this.members.length; i++ ) {
+		if( !this.members[ i ].cost ) {
+			this.members[ i ].countCost( taxiArray );
+			console.log( 'members', this.members[ i ].cost );
+		}
 		if( this.members[ i ].cost < bestCost ) {
 			best = this.members[ i ];
 			bestCost = this.members[ i ].cost;
@@ -343,10 +348,10 @@ Population.prototype.start = function( amount, taxiArray ) {
   for ( var i = 0; i < this.members.length; i++ ) {
       this.members[i].countCost( taxiArray );
   }
-	this.findBest();
+	this.findBest( taxiArray );
 	console.log( 'Best in ' + this.generationNumber + ':', this.best );
 
-	while( this.generationNumber < amount || this.best.cost <= 0 ) {
+	while( this.generationNumber < amount && this.best.cost > 0 ) {
 		this.generation( taxiArray );
 		console.log( 'Best in ' + this.generationNumber + ':', this.best );
 	}

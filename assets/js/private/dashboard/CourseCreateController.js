@@ -2,7 +2,7 @@ DashboardModule.controller( 'CourseCreateController', ['$scope', '$http', '$filt
 
 
   $( '.sidebar .menu a' ).removeClass( 'active' );
-  $( '.sidebar .menu .courses-link' ).addClass( 'active' );
+  $( '.sidebar .menu .course-create-link' ).addClass( 'active' );
   $( '.topbar .menu a' ).removeClass( 'active' );
   $( '.topbar .menu .course-create-link' ).addClass( 'active' );
 
@@ -39,6 +39,9 @@ DashboardModule.controller( 'CourseCreateController', ['$scope', '$http', '$filt
       window.location.href = '/#/courses';
       $( document ).trigger({
         type:"interfaceUpdate"
+      });
+      $( document ).trigger({
+        type:"geneticStart"
       });
     } );
   }
