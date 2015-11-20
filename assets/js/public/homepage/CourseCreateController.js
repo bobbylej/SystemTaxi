@@ -1,10 +1,6 @@
-DashboardModule.controller( 'CourseCreateController', ['$scope', '$http', '$filter', 'toastr', function( $scope, $http, $filter ) {
+HomepageModule.controller( 'CourseCreateController', ['$scope', '$http', '$filter', 'toastr', function( $scope, $http, $filter ) {
 
 
-  $( '.sidebar .menu a' ).removeClass( 'active' );
-  $( '.sidebar .menu .course-create-link' ).addClass( 'active' );
-  $( '.topbar .menu a' ).removeClass( 'active' );
-  $( '.topbar .menu .course-create-link' ).addClass( 'active' );
   $( '.topbar-inner .menu a' ).removeClass( 'active' );
   $( '.topbar-inner .menu .course-create-link' ).addClass( 'active' );
 
@@ -40,9 +36,6 @@ DashboardModule.controller( 'CourseCreateController', ['$scope', '$http', '$filt
       console.log( course );
       //$scope.course = course;
       window.location.href = '/#/courses/planning';
-      $( document ).trigger({
-        type:"interfaceUpdate"
-      });
       $( document ).trigger({
         type:"geneticStart"
       });

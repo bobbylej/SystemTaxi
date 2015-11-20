@@ -3,6 +3,7 @@
 
 <nav class="topbar">
   <ul class="menu">
+    <a class="course-planning-link" href="/#/courses/planning"><li>Planuj</li></a>
     <a class="course-edit-link" href="/#/courses/edit"><li>Modyfikuj</li></a>
     <a class="course-create-link" href="/#/courses/create"><li>Stworz</li></a>
     <a class="courses-link" href="/#/courses"><li>Lista</li></a>
@@ -152,7 +153,7 @@
          <div class="table-responsive table-courses">
            <table class="table table-bordered table-striped table-hover">
              <tr>
-               <td>Koszt: <br/> {{ preview.course.koszt }} zł</td>
+               <td>Koszt: <br/> {{ preview.course.koszt }} <span ng-if="preview.course.koszt != ''">zł</span></td>
                <td>Anulowany: <br/> {{ preview.course.anulowane }}</td>
                <td>Zmieniający: <br/> {{ preview.course.zmieniajacy }}</td>
                <td>Czas do odbioru: <br/> {{ preview.course.czas_do_odbioru }}</td>
@@ -162,6 +163,8 @@
            </table>
         </div>
        </div>
+   </div>
+   <div class="preloader preloader-courses">
    </div>
 </div>
 </div>

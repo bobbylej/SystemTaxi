@@ -150,35 +150,65 @@ module.exports = {
       var standard = req.query.standard != undefined ? req.query.standard : '';
       var osob = req.query.osob != undefined ? req.query.osob : 0;
 
-      var data = TaxiModel.find( { or: [ { stan: 'wolny'}, { stan: 'przypisany do kursu' } ] } )
-        .populate('auto').exec( function( err, taxi ) {
-
-          taxi = taxi.filter( function( elem ) {
-            if( standard != '' ) {
-              if( elem.auto.standard ) {
-                if( elem.auto.standard.indexOf( standard ) == -1 ) {
-                  return false;
-                }
-              }
-              else {
-                return false;
-              }
-            }
-            if( osob != '' ) {
-              if( elem.auto.osob ) {
-                if( parseInt(elem.auto.osob) < parseInt(osob) ) {
-                  return false;
-                }
-              }
-              else {
-                return false;
-              }
-            }
+      CourseModel.find( { status_kursu: 'oczekuje' } ).exec( function( err, coursesModified ) {
+        var taxiNotFree = [];
+        coursesModified = coursesModified.filter( function( course ) {
+          if( course.zmieniajacy && course.zmieniajacy != '' ) {
+            taxiNotFree.push( course.taksowkarz );
             return true;
-          } );
+          }
+          return false;
+        } );
 
 
-          res.send( taxi );
+        var data = TaxiModel.find( { or: [ { stan: 'wolny'}, { stan: 'przypisany do kursu' } ] } )
+          .populate('auto').exec( function( err, taxi ) {
+
+            taxi = taxi.filter( function( elem ) {
+              if( standard != '' ) {
+                if( elem.auto.standard ) {
+                  if( elem.auto.standard.indexOf( standard ) == -1 ) {
+                    return false;
+                  }
+                }
+                else {
+                  return false;
+                }
+              }
+              if( osob != '' ) {
+                if( elem.auto.osob ) {
+                  if( parseInt(elem.auto.osob) < parseInt(osob) ) {
+                    return false;
+                  }
+                }
+                else {
+                  return false;
+                }
+              }
+              return true;
+            } );
+
+            taxi = taxi.filter( function( elem ) {
+              if( taxiNotFree.indexOf( elem.id ) != -1 ) {
+                return false;
+              }
+              return true;
+            } );
+
+            res.send( taxi );
+            res.end();
+        } );
+        //return data;
+
+      } );
+  },
+
+  getLocation: function( req, res ) {
+
+      var id = req.query.id != undefined ? req.query.id : '';
+
+      var data = TaxiLocation.findOne( { id: id } ).exec( function( err, location ) {
+          res.send( location );
           res.end();
       } );
       //return data;

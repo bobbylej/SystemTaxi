@@ -82,7 +82,7 @@ module.exports = {
           klient: { 'contains': klient },
           osob: { '>=': osob_od, '<=': osob_do },
           anulowane: { 'contains': anulowane }
-        }, skip: pomin, limit: limit } )
+        }, skip: pomin, limit: limit, sort: 'czas_zamowienia DESC' } )
         .populate('adres_odbioru').populate('adres_dostraczenia').populate('zmieniajacy').exec( function( err, courses ) {
 
 
@@ -250,7 +250,7 @@ module.exports = {
           id: { 'contains': id },
           klient: { 'contains': klient },
           osob: { '>=': osob_od, '<=': osob_do },
-          anulowane: { 'contains': anulowane }
+          anulowane: false
         }, skip: pomin, limit: limit } )
         .populate('adres_odbioru').populate('adres_dostraczenia').populate('zmieniajacy').exec( function( err, courses ) {
 
@@ -415,7 +415,11 @@ module.exports = {
           anulowane: { 'contains': 0 }
         }, skip: pomin, limit: limit, sort: 'status_kursu ASC' } )
         .populate('adres_odbioru').populate('adres_dostraczenia').populate('zmieniajacy').exec( function( err, courses ) {
-
+          if( err ) {
+            res.send( 'Erorr' + err );
+            res.end();
+            return false;
+          }
 
           courses = courses.filter( function( elem ) {
             if( taksowkarz != '' ) {
@@ -628,6 +632,27 @@ module.exports = {
     CourseModel.update( { id: id }, { haslo_anulowania: haslo_anulowania } ).exec(function( err, updated ) {
       res.send( updated );
     } );
+  },
+
+  cancel: function( req, res ) {
+    var id = req.body.id != undefined ? req.body.id : 0;
+    var haslo_anulowania = req.body.haslo_anulowania != undefined ? req.body.haslo_anulowania : 'admin';
+
+    CourseModel.findOne( { id: id, haslo_anulowania: haslo_anulowania } ).exec( function( err, course ) {
+      if( err ) {
+        res.send( { error: 1 } );
+      }
+      if( course ) {
+        if( course.taksowkarz ) {
+          console.log( "taxi", course.taksowkarz );
+          TaxiModel.update( { id: course.taksowkarz }, { stan: 'wolny' } );
+        }
+        CourseModel.update( { id: id }, { anulowane: true, taksowkarz: null } ).exec( function( err, updated ) {
+          res.send( updated );
+        } );
+      }
+    } );
+
   },
 
   updateTaxi: function( req, res ) {

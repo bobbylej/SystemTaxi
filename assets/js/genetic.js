@@ -272,9 +272,11 @@ Solution.prototype.cross = function( solution ) {
 
 Solution.prototype.countCost = function( taxiArray ) {
 	var cost = 0;
+
 	for( var i = 0; i < this.genes.length; i++ ) {
 		cost += taxiArray[ i ].road[ this.genes[ i ] ];
 	}
+	
 	this.cost = cost;
 	//console.log( 'cost:', cost, this.genes.length, this.genes );
 	return cost;

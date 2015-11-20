@@ -1,13 +1,12 @@
 var DashboardModule = angular.module('DashboardModule', ['toastr', 'ngRoute']);
 
-
 DashboardModule.config(function($routeProvider, $locationProvider) {
   $routeProvider
 
   // route for the home page
   .when('/', {
-      templateUrl : '/templates/test.html',
-      controller  : 'mainController'
+      templateUrl : '/templates/taxi.html',
+      controller  : 'TaxiWorkController'
   })
 
   .when('/courses', {
@@ -23,6 +22,11 @@ DashboardModule.config(function($routeProvider, $locationProvider) {
   .when('/courses/create', {
       templateUrl : '/templates/course_create.html',
       controller  : 'CourseCreateController'
+  })
+
+  .when('/courses/cancel', {
+      templateUrl : '/templates/course_create.html',
+      controller  : 'CourseCancelController'
   })
 
   .when('/courses/planning', {
@@ -43,14 +47,13 @@ DashboardModule.config(function($routeProvider, $locationProvider) {
   .when('/taxi/in_work', {
       templateUrl : '/templates/taxi.html',
       controller  : 'TaxiWorkController'
+  })
+
+  .when('/map', {
+      templateUrl : '/templates/map.html',
+      controller  : 'MapController'
   });
 
   // use the HTML5 History API
   //$locationProvider.html5Mode(true);
-});
-
-
-DashboardModule.controller('mainController', function($scope) {
-    // create a message to display in our view
-    $scope.message = 'Everyone come and see how good I look!\n';
 });

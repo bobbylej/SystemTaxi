@@ -1,0 +1,20 @@
+<div class="content content-map">
+
+  <!--
+  <nav class="topbar">
+    <ul class="menu">
+      <a class="map-link" href="/#/map"><li>Wszyscy</li></a>
+    </ul>
+  </nav>
+  -->
+
+
+  <div class="jumbotron text-center">
+    <div class="filter-container">
+      <p>Filtrowanie:</p>
+      <input class="form-control" type="text" name="taxi.id" ng-model="taxi.id" ng-change="filter( taxi, client )" placeholder="Taksowkarz"/>
+      <input class="form-control" type="text" name="client" ng-model="client" ng-change="filter( taxi, client )" placeholder="Klient"/>
+    </div>
+    <div id="googleMap" style="width:100%;height:400px;"></div>
+  </div>
+</div>

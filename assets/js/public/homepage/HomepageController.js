@@ -1,4 +1,4 @@
-homepageModule.controller('HomepageController', ['$scope', '$http', 'toastr', function($scope, $http, toastr){
+HomepageModule.controller('HomepageController', ['$scope', '$http', 'toastr', function($scope, $http, toastr){
 
 	// set-up loginForm loading state
 	$scope.loginForm = {

@@ -1,4 +1,4 @@
-DashboardModule.controller( 'PlanningCoursesController', ['$scope', '$http', '$filter', 'toastr', function( $scope, $http, $filter ) {
+HomepageModule.controller( 'PlanningCoursesController', ['$scope', '$http', '$filter', 'toastr', function( $scope, $http, $filter ) {
 
   var allCourses = [];
 
@@ -48,10 +48,7 @@ DashboardModule.controller( 'PlanningCoursesController', ['$scope', '$http', '$f
             } ).success( function( course, status ) {
               console.log( course );
               //$scope.course = course;
-              window.location.href = '/#/courses';
-              $( document ).trigger({
-                type:"interfaceUpdate"
-              });
+              window.location.href = '/#/';
             } );
           }
         }

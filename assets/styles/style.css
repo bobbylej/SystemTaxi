@@ -60,6 +60,17 @@ nav.sidebar li:hover, nav.sidebar a.active li {
 nav.sidebar li a {
 }
 
+.home #content {
+  width: 100%;
+  float: left;
+}
+
+.home .btn-create-course {
+  width: 50%;
+  height: 50px;
+  font-size: 30px;
+}
+
 #content {
   position: relative;
   width: 85%;
@@ -68,19 +79,29 @@ nav.sidebar li a {
   min-height: 500px;
 }
 
-nav.topbar {
+.jumbotron {
+  position: relative;
+}
+
+nav.topbar, nav.topbar-inner {
   position: absolute;
   top: -40px;
   right: 10px;
   height: 40px;
 }
 
-nav.topbar ul {
-  list-style: none;
-
+nav.topbar-inner {
+  top: 10px;
+  right: 25%;
+  margin-right: 60px
 }
 
-nav.topbar ul li {
+nav.topbar ul, nav.topbar-inner ul {
+  list-style: none;
+  margin: 0;
+}
+
+nav.topbar ul li, nav.topbar-inner ul li {
   display: inline-block;
   padding: 10px;
   width: 100px;
@@ -92,7 +113,11 @@ nav.topbar ul li {
   border-top-left-radius: 5px;
 }
 
-nav.topbar ul li:hover, nav.topbar ul .active li {
+nav.topbar-inner ul li {
+  background-color: #fff;
+}
+
+nav.topbar ul li:hover, nav.topbar ul .active li, nav.topbar-inner ul li:hover, nav.topbar-inner ul .active li {
   background-color: #f39c12;
   color: #fff;
 }
@@ -113,4 +138,8 @@ nav.topbar ul li:hover, nav.topbar ul .active li {
 
 table tbody tr:hover {
   background-color: #FFD584 !important;
+}
+
+input[type="submit"] {
+  width: 100%;
 }

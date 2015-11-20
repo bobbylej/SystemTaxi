@@ -31,6 +31,7 @@ var jsFilesToInject = [
   'js/dependencies/angular.js',
   'js/dependencies/angular*.js',
   'js/dependencies/**/*.js',
+  
 
   'js/genetic.js',
 

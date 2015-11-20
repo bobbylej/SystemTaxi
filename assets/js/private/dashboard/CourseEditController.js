@@ -23,7 +23,7 @@ DashboardModule.controller( 'CourseEditController', ['$scope', '$http', '$filter
 
   $scope.editCourse = function( course ) {
     $http.post( "/edit_course", { id: course.id, taksowkarz: course.taksowkarz.id, zmieniajacy: $scope.login } ).success( function(data, status) {
-        window.location.href = '#/courses';
+        window.location.href = '#/courses/planning';
         $( document ).trigger({
           type:"geneticStart"
         });
