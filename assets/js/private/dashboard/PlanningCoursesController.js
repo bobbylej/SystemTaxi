@@ -14,18 +14,12 @@ DashboardModule.controller( 'PlanningCoursesController', ['$scope', '$http', '$f
     if( checkIndex.taxiDownloadComplete && checkIndex.coursesDownloadComplete ) {
       console.log( 'Start' );
 
-      var size = 0;
-      console.log( taxi.length, courses.length );
-      if( taxi.length > courses.length ) {
-        size = courses.length;
-      }
-      else {
-        size = taxi.length;
+      if( taxi.length < courses.length ) {
+        var size = taxi.length;
         courses = courses.slice( 0, size );
       }
-      console.log( 'Rozmiar', size );
-      var costTable = [];
-      costTable = makeCostTable( taxi, courses, size );
+
+      makeCostTable( taxi, courses );
 
       $( document ).on( 'geneticStartAlgorithm', function( data ) {
 
@@ -94,36 +88,28 @@ DashboardModule.controller( 'PlanningCoursesController', ['$scope', '$http', '$f
     });
   }
 
-  function makeCostTable( taxi, courses, size ) {
+  function makeCostTable( taxi, courses ) {
     var costTable = [];
     for( var i = 0; i < taxi.length; i++ ) {
       var taxiObject = new Taxi();
-      for( var j = 0; j < size; j++ ) {
+      for( var j = 0; j < courses.length; j++ ) {
         console.log( 'taxi', taxi[i], 'course', courses[j] );
         if( coursesFull[ courses[ j ] ].adres_odbioru ) {
-        console.log( 'taxiObj', Object.size( taxiObject.road ), taxi.length, taxiObject );
+        console.log( 'taxiObj', Object.size( taxiObject.cost ), taxi.length, taxiObject );
           countRoute( taxi[ i ], courses[ j ], taxiObject, courses[ j ] , costTable, i, taxi.length, function() {
-            /*
-            console.log( Object.size( taxiObject.road ), taxi.length, taxiObject );
-            if( Object.size( taxiObject.road ) == taxi.length ) {
-              console.log( 'rouuuute', Number( i ), taxiObject );
-              costTable[ i ] = taxiObject;
-              finish();
-            }
-            */
             finish();
           } );
         }
         else {
-          taxiObject.road[ courses[ j ] ] = 999999;
+          taxiObject.cost[ courses[ j ] ] = 999999;
         }
-        //taxiObject.road[ courses[j] ] = parseInt( Math.random() * 100 );
+        //taxiObject.cost[ courses[j] ] = parseInt( Math.random() * 100 );
       }
-      for( var j = size; j < taxi.length; j++ ) {
+      for( var j = courses.length; j < taxi.length; j++ ) {
         courses[ j ] = -1*j;
-        taxiObject.road[ -1*j ] = 999999;
+        taxiObject.cost[ -1*j ] = 999999;
       }
-      if( Object.size( taxiObject.road ) == taxi.length ) {
+      if( Object.size( taxiObject.cost ) == taxi.length ) {
         costTable[ i ] = taxiObject;
         finish();
       }
@@ -155,8 +141,8 @@ DashboardModule.controller( 'PlanningCoursesController', ['$scope', '$http', '$f
       console.log( 'Course', coursesFull[course] );
 
       $http.get( url ).success( function( response ) {
-        taxiObject.road[ courseId ] = response.rows[0].elements[0].distance.value;
-        if( Object.size( taxiObject.road ) == size ) {
+        taxiObject.cost[ courseId ] = response.rows[0].elements[0].distance.value;
+        if( Object.size( taxiObject.cost ) == size ) {
           console.log( 'rouuuute-cost', index, taxiObject );
           costTable[ index ] = taxiObject;
           console.log( 'count route ' + coursesFull[course].id + ' - ' + taxi.id, taxiObject );
