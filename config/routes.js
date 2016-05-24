@@ -67,6 +67,7 @@ module.exports.routes = {
   'GET /taxi_free': 'TaxiController.getFree',
   'GET /taxi_work': 'TaxiController.getAllInWork',
   'GET /taxi_location': 'TaxiController.getLocation',
+  'GET /taxi_profit': 'TaxiController.getTaxiProfit',
 
   'GET /taxi_auto_standars': 'TaxiAutoStandardController.getAll',
 

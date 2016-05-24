@@ -88,37 +88,43 @@ DashboardModule.controller( 'PlanningCoursesController', ['$scope', '$http', '$f
     });
   }
 
+  //funkcja tworzenia tablicy kosztow
   function makeCostTable( taxi, courses ) {
     var costTable = [];
     for( var i = 0; i < taxi.length; i++ ) {
+      //utworz obiekt taksowki
       var taxiObject = new Taxi();
+      //wypełnij tablice kosztow dojazdu do kursow
       for( var j = 0; j < courses.length; j++ ) {
-        console.log( 'taxi', taxi[i], 'course', courses[j] );
+        //jeśli posiada adres odbioru
         if( coursesFull[ courses[ j ] ].adres_odbioru ) {
-        console.log( 'taxiObj', Object.size( taxiObject.cost ), taxi.length, taxiObject );
           countRoute( taxi[ i ], courses[ j ], taxiObject, courses[ j ] , costTable, i, taxi.length, function() {
             finish();
           } );
         }
+        //jeśli nie posiada adresu odbioru
         else {
           taxiObject.cost[ courses[ j ] ] = 999999;
         }
-        //taxiObject.cost[ courses[j] ] = parseInt( Math.random() * 100 );
       }
+      //wypełnij pozostałe miejsca w tablicy kosztow dojazdu
       for( var j = courses.length; j < taxi.length; j++ ) {
+        //przypisz liczbę ujemną jako brak kursu
         courses[ j ] = -1*j;
         taxiObject.cost[ -1*j ] = 999999;
       }
+      //jeśli cała tablica kosztow dojazdu została wypełniona
       if( Object.size( taxiObject.cost ) == taxi.length ) {
+        //dodaj obiekt taksowki do tablicy kosztow
         costTable[ i ] = taxiObject;
         finish();
       }
     }
-    console.log( 'Cost table', costTable );
-    console.log( 'courses table', courses );
+    //funkcja wewnętrzna do wywołania kontynuowania algorytmu
     function finish() {
-      console.log( 'FinishCostTable', Object.size( costTable ), costTable );
+      //jeśli cała tablica kosztow dojazdu została wypełniona
       if( Object.size( costTable ) == taxi.length ) {
+        //kontynuuj algorytm
         $( document ).trigger({
           type:"geneticStartAlgorithm",
           value:costTable
@@ -128,28 +134,59 @@ DashboardModule.controller( 'PlanningCoursesController', ['$scope', '$http', '$f
     }
   }
 
+  //funkcja obliczania kosztu dojazdu taksowki do adresu odbioru kursu
   function countRoute( taxi, course, taxiObject, courseId, costTable, index, size, onComplete ) {
+    //pobierz lokalizację taksowki
     $http.get("/taxi_location?id=" + taxi.id )
     .success( function( response ) {
       var location = response;
+      //utworz adres url dla google maps API do pobrania odległości
       var url = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
+      //podaj adres początkowy
       url += 'origins=' + location.lat + ',' + location.lng;
-      url += '&destinations=' + coursesFull[course].adres_odbioru.nr_budynku + '+' + coursesFull[course].adres_odbioru.ulica + '+' + coursesFull[course].adres_odbioru.miasto + '+Polska';
-      //url += '&destinations=' + 'Polska';
+      //podaj adres końcowy
+      url += '&destinations=' + coursesFull[course].adres_odbioru.nr_budynku + '+'
+        + coursesFull[course].adres_odbioru.ulica + '+' + coursesFull[course].adres_odbioru.miasto + '+Polska';
+      //podaj klucz do google API
       url += '&key=AIzaSyBXTZogSxhfwrK_smDpOTFUBsWyoKW9ejU';
-      console.log( 'URL', url );
-      console.log( 'Course', coursesFull[course] );
 
+      //pobierz odległość taksowki od adresu odbioru z google maps API
       $http.get( url ).success( function( response ) {
-        taxiObject.cost[ courseId ] = response.rows[0].elements[0].distance.value;
-        if( Object.size( taxiObject.cost ) == size ) {
-          console.log( 'rouuuute-cost', index, taxiObject );
-          costTable[ index ] = taxiObject;
-          console.log( 'count route ' + coursesFull[course].id + ' - ' + taxi.id, taxiObject );
-          onComplete();
-        }
+        var routeDistance = response.rows[0].elements[0].distance.value;
+
+        //pobierz zysk taksowkarza w bieżącym miesiącu
+        $http.get("/taxi_profit?id=" + taxi.id )
+        .success( function( response ) {
+          console.log( response );
+          var profit = response.profit;
+          if( profit == 0 ) {
+            profit = 1;
+          }
+          //zamien status taksowkarza na wartość liczbową
+          var status = getValueOfTaxiStatus( taxi.status );
+          //oblicz koszt dojazdu
+          taxiObject.cost[ courseId ] = routeDistance / ( profit * status );
+          console.log( 'cost', taxiObject.cost[ courseId ], taxi.id );
+          //jeśli cała tablica kosztow dojazdu została wypełniona
+          if( Object.size( taxiObject.cost ) == size ) {
+            //dodaj obiekt taksowki do tablicy kosztow
+            costTable[ index ] = taxiObject;
+            onComplete();
+          }
+        } );
       } );
     } );
+  }
+
+  function getValueOfTaxiStatus( status ) {
+    switch( status ) {
+      case '1':
+        return 1;
+      case '1/2':
+        return 0.5;
+      default:
+        return 1;
+    }
   }
 
   Object.size = function(obj) {

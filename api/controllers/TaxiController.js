@@ -208,9 +208,42 @@ module.exports = {
       var id = req.query.id != undefined ? req.query.id : '';
 
       var data = TaxiLocation.findOne( { id: id } ).exec( function( err, location ) {
+          if( err ) {
+            res.send( {
+              "lat": 51.1086,
+              "lng": 17.0271
+            } );
+            res.end();
+          }
           res.send( location );
           res.end();
       } );
       //return data;
+  },
+
+  getTaxiProfit( req, res ) {
+
+      var id = req.query.id != undefined ? req.query.id : '';
+
+      var now = new Date();
+      var nowYear = now.getFullYear();
+      var nowMonth = now.getMonth();
+      var beginDate = new Date( nowYear, nowMonth, 1 );
+
+      var data = CourseModel.find( { where: { taksowkarz: { 'like': id }, czas_zamowienia: { '>=': beginDate } } } ).exec( function( err, courses ) {
+        var profit = 0;
+        for( var i in courses ) {
+          var course = courses[ i ];
+          var czas_do_dostarczenia = course.czas_dostarczenia && course.czas_odbioru ? Math.abs( course.czas_dostarczenia - course.czas_odbioru ) : '';
+          var koszt = czas_do_dostarczenia != '' ? ( czas_do_dostarczenia / 60000 ) * 0.5 : 0;
+
+          profit += koszt;
+        }
+        console.log(profit);
+
+        res.send( { profit: profit } );
+        res.end();
+      } );
+
   }
 };
