@@ -10,6 +10,12 @@ DashboardModule.controller( 'PlanningCoursesController', ['$scope', '$http', '$f
   getCourses();
   getFreeTaxi();
 
+  class Taxi {
+    constructor() {
+      this.cost = [];
+    }
+  }
+
   $( document ).on( 'geneticStart', function() {
     if( checkIndex.taxiDownloadComplete && checkIndex.coursesDownloadComplete ) {
       console.log( 'Start' );
