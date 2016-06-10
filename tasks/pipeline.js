@@ -30,10 +30,8 @@ var jsFilesToInject = [
   'js/dependencies/jquery-2.1.4.min.js',
   'js/dependencies/angular.js',
   'js/dependencies/angular*.js',
+  'js/dependencies/genetic0.js',
   'js/dependencies/**/*.js',
-  
-
-  'js/genetic.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
